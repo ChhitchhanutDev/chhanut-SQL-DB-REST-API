@@ -7,9 +7,9 @@ const userController = new UserController();
 // GET /users - List all users
 router.get('/users', userController.usersList);
 
-router.post('/user', userController.createUser);
-router.put('/user/:id', userController.updateUser);
-router.delete('/user/:id', userController.deleteUser);
+router.post('/users', userController.createUser);
+router.put('/users/:id', userController.updateUser);
+router.delete('/users/:id', userController.deleteUser);
 
 export default router;
 
