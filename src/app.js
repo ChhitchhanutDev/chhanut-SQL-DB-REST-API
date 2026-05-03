@@ -1,6 +1,8 @@
 import express from 'express';
 import userRoutes from './routes/userRoutes.js';
+import dotenv from 'dotenv'
 
+dotenv.config()
 const app = express();
 
 // Middleware
@@ -10,7 +12,7 @@ app.use(express.json());
 app.use('/', userRoutes);
 
 // Start server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
