@@ -5,7 +5,7 @@ export class UserController extends BaseController{
     // GET all users
     usersList = async (req, res) => {
         try {
-            const users = await UserModel.getAll();
+            const users = await UserModel.get();
             this.success(res, 200, 'List of users', users);
         } catch (error) {
             this.error(res, 500, error.message);

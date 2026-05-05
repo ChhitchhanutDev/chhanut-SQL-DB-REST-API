@@ -1,26 +1,33 @@
-import { connection } from '../config/db.js';
+import { BaseModel } from './baseModel.js';
 
-export class UserModel {
-    static getAll = async () => {
-        const [rows] = await connection.query('SELECT * FROM users');
+export class UserModel extends BaseModel {
+    static table = 'users';
+
+    static get = async () => {
+        const sql = `SELECT * FROM  ${this.table}`;
+        const rows = await this.query(sql);
         return rows;
     }
+
     static create = async (name) => {
-        const sql = 'INSERT INTO users (user) VALUES (?)';
-        const [row] = await connection.execute(sql, [name]);
-        return { id: row.insertId, name };
+        const sql = `INSERT INTO ${this.table} (user) VALUES (?)`;
+        const result = await this.execute(sql, [name]);
+        return { id: result.insertId, name };
     }
+
     static find = async (id) => {
-        const sql = 'SELECT * FROM users where id = ?';
-        const [row] = await connection.execute(sql, [id]);
-        return row ;
+        const sql = `SELECT * FROM ${this.table} where id = ?`;
+        const rows = await this.query(sql, [id]);
+        return rows;
     }
+
     static update = async (name, id) => {
-        const sql = 'UPDATE users SET user = ? WHERE id = ?';
-        await connection.execute(sql, [name, id]);
+        const sql = `UPDATE ${this.table} SET user = ? WHERE id = ?`;
+        await this.execute(sql, [name, id]);
     }
+
     static delete = async (id) => {
-        const sql = 'DELETE FROM users WHERE id = ?';
-        await connection.execute(sql, [id]);
+        const sql = `DELETE FROM ${this.table} WHERE id = ?`;
+        await this.execute(sql, [id]);
     }
 }
