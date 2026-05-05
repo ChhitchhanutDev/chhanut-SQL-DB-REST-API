@@ -2,7 +2,7 @@ import { ProductModel } from "../models/productModel.js";
 import { BaseController } from "./baseController.js";
 
 export class ProductController extends BaseController{
-    List = async (req, res) => {
+    list = async (req, res) => {
         try {
             const products = await ProductModel.get();
             this.success(res, 200, 'List of products', products);

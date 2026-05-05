@@ -3,7 +3,7 @@ import { BaseController } from "./baseController.js";
 
 export class UserController extends BaseController{
     // GET all users
-    usersList = async (req, res) => {
+    list = async (req, res) => {
         try {
             const users = await UserModel.get();
             this.success(res, 200, 'List of users', users);
@@ -13,7 +13,7 @@ export class UserController extends BaseController{
     }
 
     // Create user
-    createUser = async (req, res) => {
+    create = async (req, res) => {
         const name = req.body.name;
         try {
             const user = await UserModel.create(name);
@@ -24,7 +24,7 @@ export class UserController extends BaseController{
     }
 
     // Update user
-    updateUser = async (req, res) => {
+    update = async (req, res) => {
         const id = parseInt(req.params.id);
         const name = req.body.name;
         try {
@@ -40,7 +40,7 @@ export class UserController extends BaseController{
     }
 
     // Delete user
-    deleteUser = async (req, res) => {
+    delete = async (req, res) => {
         const id = parseInt(req.params.id);
         try {
             const user = await UserModel.find(id);
